@@ -13,7 +13,8 @@ def writeToCSV(csvFile, line):
     csvFile.write('\n')
 
 
-def productCodeProcess()
+def productCodeProcess():
+    pass
 
 # command arguments
 parser = argparse.ArgumentParser(description='csv to postgres',\
