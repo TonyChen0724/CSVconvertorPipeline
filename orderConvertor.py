@@ -24,13 +24,15 @@ args = parser.parse_args()
 csv_file = args.file
 
 print("debug")
-new_csv_file = "C:\\Users\\OEM\\Desktop\\nzkwRebuild\\databaseTransfer\\newCustomer.csv" # need to be arguments
+new_csv_file = "C:\\Users\\OEM\\Desktop\\nzkwRebuild\\databaseTransfer\\newOrder.csv" # need to be arguments
 
 included_cols = [2, 3, 5, 8]
 i = 0
 
 # open csv file
 with open(csv_file, 'r') as csvfile:
+    # 43 columns : product code -37
+    headerLine = "Order Reference,Order Grant Total,Customer First Name,Customer Last Name,Customer Email,Billing Address Line 1,Billing Address Line 2,Billing Address Line 3,Billing Address Town,Billing Address Post Code,Billing Address Region,Billing Address Country,Shipping Address Same As Billing,Shipping Address Line 1,Shipping Address Line 2,Shipping Address Line 3,Shipping Address Town,Shipping Address Post Code,Shipping Address Region,Shipping Address Country,Shipping Method,Requested Shipping Date,Order Shipping Amount,Order Shipping Description,Order Shipping Tax Percent,Order Shipping Tax Amount,Payment Method,Is Payment Received,Payment Reference,Is Manually Approved,Payment Terms,Public Notes,Private Notes,Is Tax Applicable,Order Discount Amount,Prices Tax Inclusive,Label List,Product Code,Quantity,Unit Price,Tax Code,Tax Percent,Tax Line Amount,Line Note"
 
 
     # get number of columns
