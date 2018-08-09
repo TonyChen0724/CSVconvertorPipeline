@@ -68,9 +68,20 @@ with open(csv_file, 'r') as csvfile:
 
         with open(new_csv_file, "a") as csvFile:
             writeToCSV(csvFile, newCSVline)"""
-        infoArray = line.split(',') # todo: get array of 43 items all empty and fill them with necessary info
+        zencartArray = line.split(',') # todo: get array of 43 items all empty and fill them with necessary info
+        arrayTradevine = 43 * [""]
+        print(arrayTradevine)
+
+        arrayTradevine[0] = zencartArray[0]
+        arrayTradevine[1] = zencartArray[15]
+        arrayTradevine[2] = zencartArray[2]
+        arrayTradevine[5] = zencartArray[5]
+        arrayTradevine[8] = zencartArray[6]
+        arrayTradevine[9] = zencartArray[9]
+        arrayTradevine[11] = zencartArray[10]
 
 
+        print(arrayTradevine)
         pass
 
 
