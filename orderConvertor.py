@@ -31,6 +31,7 @@ i = 0
 
 # open csv file
 with open(csv_file, 'r') as csvfile:
+    next(csvfile)
     # 43 columns : product code -37
     headerLineTradevine = "Order Reference,Order Grant Total,Customer First Name,Customer Last Name,Customer Email,Billing Address Line 1,Billing Address Line 2,Billing Address Line 3,Billing Address Town,Billing Address Post Code,Billing Address Region,Billing Address Country,Shipping Address Same As Billing,Shipping Address Line 1,Shipping Address Line 2,Shipping Address Line 3,Shipping Address Town,Shipping Address Post Code,Shipping Address Region,Shipping Address Country,Shipping Method,Requested Shipping Date,Order Shipping Amount,Order Shipping Description,Order Shipping Tax Percent,Order Shipping Tax Amount,Payment Method,Is Payment Received,Payment Reference,Is Manually Approved,Payment Terms,Public Notes,Private Notes,Is Tax Applicable,Order Discount Amount,Prices Tax Inclusive,Label List,Product Code,Quantity,Unit Price,Tax Code,Tax Percent,Tax Line Amount,Line Note"
     elements = headerLineTradevine.split(",")
@@ -55,8 +56,9 @@ with open(csv_file, 'r') as csvfile:
         writeToCSV(csvFile, headerLineTradevine)
 
     # get number of columns
-    for line in csvfile.readlines():
+    i = 0
 
+    for line in csvfile.readlines():
         """array = line.split(',')
         firstName, lastName, emailAddress, phoneNumber = setColumn(included_cols, array)
 
@@ -68,9 +70,10 @@ with open(csv_file, 'r') as csvfile:
 
         with open(new_csv_file, "a") as csvFile:
             writeToCSV(csvFile, newCSVline)"""
-        zencartArray = line.split(',') # todo: get array of 43 items all empty and fill them with necessary info
+
+        zencartArray = line.split(',')
         arrayTradevine = 43 * [""]
-        print(arrayTradevine)
+        #print(arrayTradevine)
 
         arrayTradevine[0] = zencartArray[0]
         arrayTradevine[1] = zencartArray[15]
@@ -79,6 +82,16 @@ with open(csv_file, 'r') as csvfile:
         arrayTradevine[8] = zencartArray[6]
         arrayTradevine[9] = zencartArray[9]
         arrayTradevine[11] = zencartArray[10]
+
+        product_number = (len(zencartArray) - 20) / 3 #todo: have > 2 product will create x - 2 new, investigate how it has more lines than I expected
+        # print(len(zencartArray))
+        # print(product_number)
+        # newLineGenerated = int(product_number) - 1
+        # print(newLineGenerated)
+
+        # for i in range(newLineGenerated):
+        #     arrayTradevine = 43 * [""]
+        #     print(arrayTradevine)
 
 
         print(arrayTradevine)
