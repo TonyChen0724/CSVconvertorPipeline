@@ -83,8 +83,23 @@ with open(csv_file, 'r') as csvfile:
         arrayTradevine[9] = zencartArray[9]
         arrayTradevine[11] = zencartArray[10]
 
-        product_number = (len(zencartArray) - 20) / 3 #todo: have > 2 product will create x - 2 new, investigate how it has more lines than I expected
-        # print(len(zencartArray))
+        #------------------------------------------------------------------------------------------------
+        # special process to get rid of trailing empty cells while leave the empty cells in between untouched
+        for i in range(len(zencartArray)-1):
+            if zencartArray[i] == '' and (zencartArray[i+1] == '' or zencartArray[i+1] == '\n'):
+                zencartArray[i] = 'xxx'
+
+        while 'xxx' in zencartArray:
+            zencartArray.remove('xxx')
+
+        if zencartArray[-1] == '':
+            del zencartArray[-1]
+        #------------------------------------------------------------------------------------------------
+
+        product_number = (len(zencartArray) - 20) / 5
+        print(len(zencartArray))
+
+        print(zencartArray)
         print(product_number) # todo: length of zencart array is always fixed? => it's the length of longest line
         # newLineGenerated = int(product_number) - 1
         # print(newLineGenerated)
@@ -94,7 +109,7 @@ with open(csv_file, 'r') as csvfile:
         #     print(arrayTradevine)
 
 
-        print(arrayTradevine)
+        # print(arrayTradevine)
         pass
 
 
