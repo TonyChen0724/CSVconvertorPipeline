@@ -85,7 +85,7 @@ with open(csv_file, 'r') as csvfile:
 
         product_number = (len(zencartArray) - 20) / 3 #todo: have > 2 product will create x - 2 new, investigate how it has more lines than I expected
         # print(len(zencartArray))
-        # print(product_number)
+        print(product_number) # todo: length of zencart array is always fixed? => it's the length of longest line
         # newLineGenerated = int(product_number) - 1
         # print(newLineGenerated)
 
