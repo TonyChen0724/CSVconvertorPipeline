@@ -96,10 +96,10 @@ with open(csv_file, 'r') as csvfile:
             del zencartArray[-1]
         #------------------------------------------------------------------------------------------------
 
-        product_number = (len(zencartArray) - 20) / 5
-        print(len(zencartArray))
+        product_number = int((len(zencartArray) - 20) / 5)
+        #print(len(zencartArray))
 
-        print(zencartArray)
+        #print(zencartArray)
         print(product_number) # todo: length of zencart array is always fixed? => it's the length of longest line
         # newLineGenerated = int(product_number) - 1
         # print(newLineGenerated)
