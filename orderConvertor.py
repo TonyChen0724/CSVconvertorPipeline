@@ -73,7 +73,7 @@ with open(csv_file, 'r') as csvfile:
 
         zencartArray = line.split(',')
         arrayTradevine = 43 * [""]
-        #print(arrayTradevine)
+
 
         arrayTradevine[0] = zencartArray[0]
         arrayTradevine[1] = zencartArray[15]
@@ -97,19 +97,17 @@ with open(csv_file, 'r') as csvfile:
         #------------------------------------------------------------------------------------------------
 
         product_number = int((len(zencartArray) - 20) / 5)
-        #print(len(zencartArray))
 
-        #print(zencartArray)
-        print(product_number) # todo: length of zencart array is always fixed? => it's the length of longest line
-        # newLineGenerated = int(product_number) - 1
-        # print(newLineGenerated)
+        print(product_number)
+        line2Generate = product_number - 1
 
-        # for i in range(newLineGenerated):
-        #     arrayTradevine = 43 * [""]
-        #     print(arrayTradevine)
+        print(arrayTradevine) # append to csv
+        for i in range(line2Generate):
+            #arrayTradevine = 43 * [""]
+            print(arrayTradevine) # append to csv
 
 
-        # print(arrayTradevine)
+
         pass
 
 
