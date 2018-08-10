@@ -74,7 +74,8 @@ with open(csv_file, 'r') as csvfile:
         zencartArray = line.split(',')
         arrayTradevine = 43 * [""]
 
-
+#------------------------------------------------------------------------
+        # mapping zencart to tradevine
         arrayTradevine[0] = zencartArray[0]
         arrayTradevine[1] = zencartArray[15]
         arrayTradevine[2] = zencartArray[2]
@@ -82,6 +83,10 @@ with open(csv_file, 'r') as csvfile:
         arrayTradevine[8] = zencartArray[6]
         arrayTradevine[9] = zencartArray[9]
         arrayTradevine[11] = zencartArray[10]
+        arrayTradevine[38] = zencartArray[26]
+        arrayTradevine[39] = zencartArray[27]
+        arrayTradevine[37] = zencartArray[29]
+#-------------------------------------------------------------------------------------
 
         #------------------------------------------------------------------------------------------------
         # special process to get rid of trailing empty cells while leave the empty cells in between untouched
@@ -97,14 +102,33 @@ with open(csv_file, 'r') as csvfile:
         #------------------------------------------------------------------------------------------------
 
         product_number = int((len(zencartArray) - 20) / 5)
-
-        print(product_number)
         line2Generate = product_number - 1
 
         print(arrayTradevine) # append to csv
-        for i in range(line2Generate):
-            #arrayTradevine = 43 * [""]
+        for i in range(line2Generate-1):
+            arrayTradevine = 43 * [""]
+
+            # ------------------------------------------------------------------------
+            # mapping zencart to tradevine
+            arrayTradevine[0] = zencartArray[0]
+            arrayTradevine[1] = zencartArray[15]
+            arrayTradevine[2] = zencartArray[2]
+            arrayTradevine[5] = zencartArray[5]
+            arrayTradevine[8] = zencartArray[6]
+            arrayTradevine[9] = zencartArray[9]
+            arrayTradevine[11] = zencartArray[10]
+            try:
+                arrayTradevine[38] = zencartArray[26 + 5 * (i+1)]
+                arrayTradevine[39] = zencartArray[27 + 5 * (i+1)]
+                arrayTradevine[37] = zencartArray[29 + 5 * (i+1)]
+            except IndexError:
+                print("error" + str(26+5*(i+1)))
+            # -------------------------------------------------------------------------------------
+
+
+
             print(arrayTradevine) # append to csv
+
 
 
 
