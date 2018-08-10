@@ -24,7 +24,7 @@ args = parser.parse_args()
 csv_file = args.file
 
 print("debug")
-new_csv_file = "C:\\Users\\OEM\\Desktop\\nzkwRebuild\\newOrder2.csv" # need to be arguments
+new_csv_file = "C:\\Users\\OEM\\Desktop\\nzkwRebuild\\newOrder.csv" # need to be arguments
 
 included_cols = [2, 3, 5, 8]
 i = 0
@@ -85,7 +85,8 @@ with open(csv_file, 'r') as csvfile:
         arrayTradevine[11] = zencartArray[10]
         arrayTradevine[38] = zencartArray[21]
         arrayTradevine[39] = zencartArray[22]
-        arrayTradevine[37] = zencartArray[24]
+        # arrayTradevine[37] = zencartArray[24] # later use
+        arrayTradevine[37] = "KWTB003BK"
 #-------------------------------------------------------------------------------------
 
         #------------------------------------------------------------------------------------------------
@@ -114,7 +115,7 @@ with open(csv_file, 'r') as csvfile:
                 newTradevineLine += ","
 
         with open(new_csv_file, "a") as csvFile:
-            writeToCSV(csvFile, newTradevineLine)
+            writeToCSV(csvFile, newTradevineLine + ",")
         #---------------------------------------------------------
 
         for i in range(line2Generate):
@@ -133,7 +134,8 @@ with open(csv_file, 'r') as csvfile:
 
             arrayTradevine[38] = zencartArray[26 + 5 * i]
             arrayTradevine[39] = zencartArray[27 + 5 * i]
-            arrayTradevine[37] = zencartArray[29 + 5 * i]
+            # arrayTradevine[37] = zencartArray[29 + 5 * i] # later use
+            arrayTradevine[37] = "KWTB003BK"
 
             # -------------------------------------------------------------------------------------
 
@@ -149,7 +151,7 @@ with open(csv_file, 'r') as csvfile:
                     newTradevineLine += ","
 
             with open(new_csv_file, "a") as csvFile:
-                writeToCSV(csvFile, newTradevineLine)
+                writeToCSV(csvFile, newTradevineLine + ",")
             # ---------------------------------------------------------
 
 
