@@ -24,7 +24,7 @@ args = parser.parse_args()
 csv_file = args.file
 
 print("debug")
-new_csv_file = "C:\\Users\\OEM\\Desktop\\nzkwRebuild\\newOrder.csv" # need to be arguments
+new_csv_file = "C:\\Users\\OEM\\Desktop\\nzkwRebuild\\newOrder2.csv" # need to be arguments
 
 included_cols = [2, 3, 5, 8]
 i = 0
@@ -83,9 +83,9 @@ with open(csv_file, 'r') as csvfile:
         arrayTradevine[8] = zencartArray[6]
         arrayTradevine[9] = zencartArray[9]
         arrayTradevine[11] = zencartArray[10]
-        arrayTradevine[38] = zencartArray[26]
-        arrayTradevine[39] = zencartArray[27]
-        arrayTradevine[37] = zencartArray[29]
+        arrayTradevine[38] = zencartArray[21]
+        arrayTradevine[39] = zencartArray[22]
+        arrayTradevine[37] = zencartArray[24]
 #-------------------------------------------------------------------------------------
 
         #------------------------------------------------------------------------------------------------
@@ -105,7 +105,19 @@ with open(csv_file, 'r') as csvfile:
         line2Generate = product_number - 1
 
         print(arrayTradevine) # append to csv
-        for i in range(line2Generate-1):
+        #---------------------------------------------------------
+        # write line to csv file
+        newTradevineLine = ""
+        for i in range(len(arrayTradevine)):
+            newTradevineLine += arrayTradevine[i]
+            if i != len(arrayTradevine) - 1:
+                newTradevineLine += ","
+
+        with open(new_csv_file, "a") as csvFile:
+            writeToCSV(csvFile, newTradevineLine)
+        #---------------------------------------------------------
+
+        for i in range(line2Generate):
             arrayTradevine = 43 * [""]
 
             # ------------------------------------------------------------------------
@@ -117,17 +129,28 @@ with open(csv_file, 'r') as csvfile:
             arrayTradevine[8] = zencartArray[6]
             arrayTradevine[9] = zencartArray[9]
             arrayTradevine[11] = zencartArray[10]
-            try:
-                arrayTradevine[38] = zencartArray[26 + 5 * (i+1)]
-                arrayTradevine[39] = zencartArray[27 + 5 * (i+1)]
-                arrayTradevine[37] = zencartArray[29 + 5 * (i+1)]
-            except IndexError:
-                print("error" + str(26+5*(i+1)))
+
+
+            arrayTradevine[38] = zencartArray[26 + 5 * i]
+            arrayTradevine[39] = zencartArray[27 + 5 * i]
+            arrayTradevine[37] = zencartArray[29 + 5 * i]
+
             # -------------------------------------------------------------------------------------
 
 
 
             print(arrayTradevine) # append to csv
+            # ---------------------------------------------------------
+            # write line to csv file
+            newTradevineLine = ""
+            for i in range(len(arrayTradevine)):
+                newTradevineLine += arrayTradevine[i]
+                if i != len(arrayTradevine) - 1:
+                    newTradevineLine += ","
+
+            with open(new_csv_file, "a") as csvFile:
+                writeToCSV(csvFile, newTradevineLine)
+            # ---------------------------------------------------------
 
 
 
