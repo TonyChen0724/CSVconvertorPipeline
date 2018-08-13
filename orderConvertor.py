@@ -129,7 +129,13 @@ with open(csv_file, 'r') as csvfile:
             arrayTradevine[5] = zencartArray[5]
             arrayTradevine[8] = zencartArray[6]
             arrayTradevine[9] = zencartArray[9]
-            arrayTradevine[11] = zencartArray[10]
+            arrayTradevine[11] = zencartArray[10] # country
+
+            if arrayTradevine[11] == "New Zealand":
+                arrayTradevine[40] = "GST"
+                arrayTradevine[41] = "15"
+            else:
+                arrayTradevine[40] = "NONE"
 
 
             arrayTradevine[38] = zencartArray[26 + 5 * i]
@@ -138,6 +144,7 @@ with open(csv_file, 'r') as csvfile:
             arrayTradevine[37] = "KWTB003BK"
 
             # -------------------------------------------------------------------------------------
+
 
 
 
