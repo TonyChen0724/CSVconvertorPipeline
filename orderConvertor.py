@@ -33,7 +33,7 @@ i = 0
 with open(csv_file, 'r') as csvfile:
     next(csvfile)
     # 43 columns : product code -37
-    headerLineTradevine = "Order Reference,Order Grant Total,Customer First Name,Customer Last Name,Customer Email,Billing Address Line 1,Billing Address Line 2,Billing Address Line 3,Billing Address Town,Billing Address Post Code,Billing Address Region,Billing Address Country,Shipping Address Same As Billing,Shipping Address Line 1,Shipping Address Line 2,Shipping Address Line 3,Shipping Address Town,Shipping Address Post Code,Shipping Address Region,Shipping Address Country,Shipping Method,Requested Shipping Date,Order Shipping Amount,Order Shipping Description,Order Shipping Tax Percent,Order Shipping Tax Amount,Payment Method,Is Payment Received,Payment Reference,Is Manually Approved,Payment Terms,Public Notes,Private Notes,Is Tax Applicable,Order Discount Amount,Prices Tax Inclusive,Label List,Product Code,Quantity,Unit Price,Tax Code,Tax Percent,Tax Line Amount,Line Note"
+    headerLineTradevine = "Order Reference,Order Grand Total,Customer First Name,Customer Last Name,Customer Email,Billing Address Line 1,Billing Address Line 2,Billing Address Line 3,Billing Address Town,Billing Address Post Code,Billing Address Region,Billing Address Country,Shipping Address Same As Billing,Shipping Address Line 1,Shipping Address Line 2,Shipping Address Line 3,Shipping Address Town,Shipping Address Post Code,Shipping Address Region,Shipping Address Country,Shipping Method,Requested Shipping Date,Order Shipping Amount,Order Shipping Description,Order Shipping Tax Percent,Order Shipping Tax Amount,Payment Method,Is Payment Received,Payment Reference,Is Manually Approved,Payment Terms,Public Notes,Private Notes,Is Tax Applicable,Order Discount Amount,Prices Tax Inclusive,Label List,Product Code,Quantity,Unit Price,Tax Code,Tax Percent,Tax Line Amount,Line Note"
     elements = headerLineTradevine.split(",")
     i = 0
     for element in elements:
@@ -83,6 +83,17 @@ with open(csv_file, 'r') as csvfile:
         arrayTradevine[8] = zencartArray[6]
         arrayTradevine[9] = zencartArray[9]
         arrayTradevine[11] = zencartArray[10]
+
+        # ----------------------------------------------------------------------------------------------------------
+        # determine tax code based on country
+        if arrayTradevine[11] == "New Zealand":
+            arrayTradevine[40] = "GST"
+            arrayTradevine[41] = "15"
+        else:
+            arrayTradevine[40] = "NONE"
+        # ----------------------------------------------------------------------------------------------------------
+        
+
         arrayTradevine[38] = zencartArray[21]
         arrayTradevine[39] = zencartArray[22]
         # arrayTradevine[37] = zencartArray[24] # later use
@@ -131,12 +142,14 @@ with open(csv_file, 'r') as csvfile:
             arrayTradevine[9] = zencartArray[9]
             arrayTradevine[11] = zencartArray[10] # country
 
+#----------------------------------------------------------------------------------------------------------
+            # determine tax code based on country
             if arrayTradevine[11] == "New Zealand":
                 arrayTradevine[40] = "GST"
                 arrayTradevine[41] = "15"
             else:
                 arrayTradevine[40] = "NONE"
-
+#----------------------------------------------------------------------------------------------------------
 
             arrayTradevine[38] = zencartArray[26 + 5 * i]
             arrayTradevine[39] = zencartArray[27 + 5 * i]
