@@ -92,7 +92,7 @@ with open(csv_file, 'r') as csvfile:
         else:
             arrayTradevine[40] = "NONE"
         # ----------------------------------------------------------------------------------------------------------
-        
+
 
         arrayTradevine[38] = zencartArray[21]
         arrayTradevine[39] = zencartArray[22]
