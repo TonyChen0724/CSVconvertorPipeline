@@ -101,9 +101,17 @@ def colours_convertor(input):
 # # angles_convertor("Options-Angles: 120 Degree")
 # #colours_convertor("Options-Colours: Red/Blue")
 
-product_code_convertor("KWFF0209-XX-YY-ZZ", "Options-AN Sizes: 06AN | Options-Angles: 120 Degree | Options-Colours: Black | ")
-product_code_convertor("KWFX725-XX", "Options-Sizes: 10AN | ")
-product_code_convertor("KWFAN816-XX-YY-ZZ", "Options-AN Sizes: 10AN | Options-NPT: 3/8' | Options-Colours: Black | ")
+# product_code_convertor("KWFF0209-XX-YY-ZZ", "Options-AN Sizes: 06AN | Options-Angles: 120 Degree | Options-Colours: Black | ")
+# product_code_convertor("KWFX725-XX", "Options-Sizes: 10AN | ")
+# product_code_convertor("KWFAN816-XX-YY-ZZ", "Options-AN Sizes: 10AN | Options-NPT: 3/8' | Options-Colours: Black | ")
+
+
+while (True):
+    template = input("Please input the product code template: ")
+
+    attribute = input("Please input the product attribute: ")
+
+    product_code_convertor(template, attribute)
 
 
 
