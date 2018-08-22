@@ -22,7 +22,7 @@ def product_code_convertor(product_code_template, product_attributes):
 
     print(prefix)
 
-
+# size
 def size_convertor(input):
     input_list = input.split(':')
     value = input_list[1].strip()
@@ -33,6 +33,27 @@ def size_convertor(input):
 
     return number
 
+# npt : basic npt convertor, still need improvement
+def npt_convertor(input):
+    input_list = input.split(':')
+    value = input_list[1].strip()[:-1]
+
+    output = ""
+    if value == '1/8':
+        output = "02D"
+    elif value == '1/4':
+        output = "04D"
+    elif value == '3/8':
+        output = "06D"
+    elif value == '1/2':
+        output = "08D"
+    elif value == '3/4':
+        output = "12D"
+    elif value == '1':
+        output = "16D"
+
+    print(output)
+    return output
 
 
 # AN size
@@ -78,6 +99,9 @@ def colours_convertor(input):
 #  an_size_convertor("Options-AN Sizes: 12AN")
 # # angles_convertor("Options-Angles: 120 Degree")
 # #colours_convertor("Options-Colours: Red/Blue")
+
 product_code_convertor("KWFF0209-XX-YY-ZZ", "Options-AN Sizes: 06AN | Options-Angles: 120 Degree | Options-Colours: Black | ")
 product_code_convertor("KWFX725-XX", "Options-Sizes: 10AN | ")
+
+npt_convertor("Options-NPT: 3/8' ")
 
