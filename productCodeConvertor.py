@@ -17,6 +17,8 @@ def product_code_convertor(product_code_template, product_attributes):
             append_value = colours_convertor(product_attribute_item)
         elif attribute_type == 'Options-Sizes':
             append_value = size_convertor(product_attribute_item)
+        elif attribute_type == 'Options-NPT':
+            append_value = npt_convertor(product_attribute_item + " ")
 
         prefix = prefix + "-" + append_value
 
@@ -52,7 +54,6 @@ def npt_convertor(input):
     elif value == '1':
         output = "16D"
 
-    print(output)
     return output
 
 
@@ -102,6 +103,9 @@ def colours_convertor(input):
 
 product_code_convertor("KWFF0209-XX-YY-ZZ", "Options-AN Sizes: 06AN | Options-Angles: 120 Degree | Options-Colours: Black | ")
 product_code_convertor("KWFX725-XX", "Options-Sizes: 10AN | ")
-
+product_code_convertor("KWFAN816-XX-YY-ZZ", "Options-AN Sizes: 10AN | Options-NPT: 3/8' | Options-Colours: Black | ")
 npt_convertor("Options-NPT: 3/8' ")
+
+
+
 
