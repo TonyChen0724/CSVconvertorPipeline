@@ -2,7 +2,37 @@ def product_code_convertor(product_code_template, product_attributes):
     product_attributes_list = product_attributes.split('|')
     product_attributes_list.remove(' ')
 
-    print()
+    template_part_list = product_code_template.split('-')
+    prefix = template_part_list[0]
+
+    for i in range(len(product_attributes_list)):
+        product_attribute_item = product_attributes_list[i]
+        attribute_type = product_attribute_item.split(":")[0].strip()
+        append_value = ""
+        if attribute_type == 'Options-AN Sizes':
+            append_value = an_size_convertor(product_attribute_item)
+        elif attribute_type == 'Options-Angles':
+            append_value = angles_convertor(product_attribute_item)
+        elif attribute_type == 'Options-Colours':
+            append_value = colours_convertor(product_attribute_item)
+        elif attribute_type == 'Options-Sizes':
+            append_value = size_convertor(product_attribute_item)
+
+        prefix = prefix + "-" + append_value
+
+    print(prefix)
+
+
+def size_convertor(input):
+    input_list = input.split(':')
+    value = input_list[1].strip()
+    number = value[:-2]
+
+    if len(number) == 1:
+        number = "0" + number
+
+    return number
+
 
 
 # AN size
@@ -13,8 +43,6 @@ def an_size_convertor(input):
 
     if len(number) == 1:
         number = "0" + number
-
-    print(number)
 
     return number
 
@@ -28,7 +56,6 @@ def angles_convertor(input):
     if len(number) == 3:
         number = number[:-1]
 
-    print(number)
 
     return number
 
@@ -44,16 +71,13 @@ def colours_convertor(input):
         output = "RB"
 
 
-
-
-
-    print(output)
-
     return output
 
 
 # test
+#  an_size_convertor("Options-AN Sizes: 12AN")
+# # angles_convertor("Options-Angles: 120 Degree")
+# #colours_convertor("Options-Colours: Red/Blue")
 product_code_convertor("KWFF0209-XX-YY-ZZ", "Options-AN Sizes: 06AN | Options-Angles: 120 Degree | Options-Colours: Black | ")
-# an_size_convertor("Options-AN Sizes: 12AN")
-# angles_convertor("Options-Angles: 120 Degree")
-colours_convertor("Options-Colours: Red/Blue")
+product_code_convertor("KWFX725-XX", "Options-Sizes: 10AN | ")
+
