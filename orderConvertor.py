@@ -1,3 +1,4 @@
+# todo: find out how to extract product template and product attribute
 import sys, argparse, csv
 
 def setColumn(included_cols, array):
