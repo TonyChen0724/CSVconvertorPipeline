@@ -1,5 +1,6 @@
 # todo: find out how to extract product template and product attribute
 import sys, argparse, csv
+from .productCodeConvertor import *
 
 def setColumn(included_cols, array):
     firstName = array[included_cols[0]]
@@ -154,8 +155,15 @@ with open(csv_file, 'r') as csvfile:
 
             arrayTradevine[38] = zencartArray[26 + 5 * i]
             arrayTradevine[39] = zencartArray[27 + 5 * i]
-            # arrayTradevine[37] = zencartArray[29 + 5 * i] # later use
-            arrayTradevine[37] = "KWTB003BK"
+
+            product_code_template = zencartArray[29 + 5 * i] # later use
+            product_attribute = zencartArray[30 + 5 * i]
+
+            product_code = product_code_convertor(product_code_template, product_attribute)
+            arrayTradevine[37] = product_code
+
+
+            #arrayTradevine[37] = "KWTB003BK"
 
             # -------------------------------------------------------------------------------------
 

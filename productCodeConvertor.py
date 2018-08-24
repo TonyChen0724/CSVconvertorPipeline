@@ -23,6 +23,7 @@ def product_code_convertor(product_code_template, product_attributes):
         prefix = prefix + append_value
 
     print(prefix)
+    return prefix
 
 # size
 def size_convertor(input):
