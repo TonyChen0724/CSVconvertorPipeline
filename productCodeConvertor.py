@@ -1,6 +1,13 @@
 def product_code_convertor(product_code_template, product_attributes):
+
+    if product_attributes == '':
+        return product_code_template
+
     product_attributes_list = product_attributes.split('|')
-    product_attributes_list.remove(' ')
+    try:
+        product_attributes_list.remove(' ')
+    except:
+        pass
 
     template_part_list = product_code_template.split('-')
     prefix = template_part_list[0]
@@ -107,12 +114,12 @@ def colours_convertor(input):
 # product_code_convertor("KWFAN816-XX-YY-ZZ", "Options-AN Sizes: 10AN | Options-NPT: 3/8' | Options-Colours: Black | ")
 
 
-while (True):
-    template = input("Please input the product code template: ")
-
-    attribute = input("Please input the product attribute: ")
-
-    product_code_convertor(template, attribute)
+# while (True):
+#     template = input("Please input the product code template: ")
+#
+#     attribute = input("Please input the product attribute: ")
+#
+#     product_code_convertor(template, attribute)
 
 
 
