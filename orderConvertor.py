@@ -14,6 +14,11 @@ def writeToCSV(csvFile, line):
     csvFile.write(line)
     csvFile.write('\n')
 
+def shippingTotalConvertor(input):
+    output = str(round(float(input) - float(input) * 3 / 23, 2))
+    return output
+
+
 
 def productCodeProcess():
     pass
@@ -86,19 +91,30 @@ with open(csv_file, 'r') as csvfile:
         arrayTradevine[9] = zencartArray[9]
         arrayTradevine[11] = zencartArray[10]
 
+        region_town = zencartArray[7]
+        arrayTradevine[8] = region_town
+        arrayTradevine[10] = region_town
+
+
         # ----------------------------------------------------------------------------------------------------------
         # determine tax code based on country
         if arrayTradevine[11] == "New Zealand":
             arrayTradevine[40] = "GST"
             arrayTradevine[41] = "15"
+            arrayTradevine[22] = shippingTotalConvertor(zencartArray[13])
+
         else:
             arrayTradevine[40] = "NONE"
-        # ----------------------------------------------------------------------------------------------------------
+            arrayTradevine[22] = zencartArray[13]
+            # ----------------------------------------------------------------------------------------------------------
 
 
         arrayTradevine[38] = zencartArray[21]
         arrayTradevine[39] = zencartArray[22]
-        arrayTradevine[37] = zencartArray[24] # later use
+        product_code_template = zencartArray[24]
+        product_attribute = zencartArray[25]
+        product_code = product_code_convertor(product_code_template, product_attribute)
+        arrayTradevine[37] = product_code
         #arrayTradevine[37] = "KWTB003BK"
 #-------------------------------------------------------------------------------------
 
@@ -144,13 +160,19 @@ with open(csv_file, 'r') as csvfile:
             arrayTradevine[9] = zencartArray[9]
             arrayTradevine[11] = zencartArray[10] # country
 
+            region_town = zencartArray[7]
+            arrayTradevine[8] = region_town
+            arrayTradevine[10] = region_town
+
 #----------------------------------------------------------------------------------------------------------
             # determine tax code based on country
             if arrayTradevine[11] == "New Zealand":
                 arrayTradevine[40] = "GST"
                 arrayTradevine[41] = "15"
+                arrayTradevine[22] = shippingTotalConvertor(zencartArray[13])
             else:
                 arrayTradevine[40] = "NONE"
+                arrayTradevine[22] = zencartArray[13]
 #----------------------------------------------------------------------------------------------------------
 
             arrayTradevine[38] = zencartArray[26 + 5 * i]

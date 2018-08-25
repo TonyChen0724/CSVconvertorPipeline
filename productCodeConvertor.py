@@ -85,6 +85,8 @@ def angles_convertor(input):
 
     if len(number) == 3:
         number = number[:-1]
+    if len(number) == 1:
+        number = "0" + number
 
 
     return number
