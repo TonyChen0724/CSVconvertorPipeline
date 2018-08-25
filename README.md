@@ -1,3 +1,3 @@
 # CSVconvertorPipeline
 
-A pipeline to synchronize tradevine with Zencart.
+A pipeline to synchronize order database of tradevine with Zencart.
