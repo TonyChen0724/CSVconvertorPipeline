@@ -84,7 +84,7 @@ with open(csv_file, 'r') as csvfile:
 #------------------------------------------------------------------------
         # mapping zencart to tradevine
         arrayTradevine[0] = zencartArray[0]
-        arrayTradevine[1] = zencartArray[15]
+        arrayTradevine[1] = shippingTotalConvertor(zencartArray[15])
         arrayTradevine[2] = zencartArray[2]
         arrayTradevine[5] = zencartArray[5]
         arrayTradevine[8] = zencartArray[6]
