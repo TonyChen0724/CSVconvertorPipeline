@@ -1,6 +1,7 @@
 def product_code_convertor(product_code_template, product_attributes):
-
-    if product_attributes == '':
+    product_attributes.strip("\"")
+    product_attributes.strip("\n")
+    if product_attributes == '' or product_attributes == '\n' or product_attributes == '"':
         return product_code_template
 
     product_attributes_list = product_attributes.split('|')
@@ -26,11 +27,25 @@ def product_code_convertor(product_code_template, product_attributes):
             append_value = size_convertor(product_attribute_item)
         elif attribute_type == 'Options-NPT':
             append_value = npt_convertor(product_attribute_item + " ")
+        elif attribute_type == 'Oil Cooler Options':
+            append_value = oil_cooler_option_convertor(product_attribute_item)
 
         prefix = prefix + append_value
 
     print(prefix)
     return prefix
+
+# Oil Cooler Options
+def oil_cooler_option_convertor(input):
+    input_list = input.split(':')
+    value = input_list[1].strip()
+    number = value[:-2]
+
+    if len(number) == 1:
+        number = "0" + number
+
+    return number
+
 
 # size
 def size_convertor(input):
