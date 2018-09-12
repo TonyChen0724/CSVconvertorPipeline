@@ -4,9 +4,10 @@ def product_code_convertor(product_code_template, product_attributes):
     if product_attributes == '' or product_attributes == '\n' or product_attributes == '"':
         return product_code_template
 
+
     product_attributes_list = product_attributes.split('|')
     try:
-        product_attributes_list.remove(' ')
+        product_attributes_list = product_attributes_list[:-1]
     except:
         pass
 
@@ -30,16 +31,45 @@ def product_code_convertor(product_code_template, product_attributes):
         elif attribute_type == 'Oil Cooler Options':
             append_value = oil_cooler_option_convertor(product_attribute_item)
 
-        prefix = prefix + append_value
+        elif attribute_type == 'Dimension':
+            append_value = dimension_convertor(product_attribute_item)
+
+        if "*" in product_code_template:
+            template_components = product_code_template.split('*')
+            while '' in template_components:
+                template_components.remove('')
+            prefix = template_components[0] + append_value + template_components[1]
+
+        else:
+            prefix = prefix + append_value
 
     print(prefix)
     return prefix
+# Dimension
+def dimension_convertor(input):
+    input_list = input.split(' ')
+    value = input_list[2].strip()
+    value = value.strip('(')
+    value = value.strip(')')
+    value = value.replace('m', '')
+
+    value_pair = value.split('-')
+    appendVal = value_pair[0] + value_pair[1]
+    return appendVal
+
+    # if len(number) == 1:
+    #     number = "0" + number
+
+    # return number
+
+dimension_convertor("Dimension: 2'~2-1/2' (51mm-64mm) | ")
+
 
 # Oil Cooler Options
 def oil_cooler_option_convertor(input):
     input_list = input.split(':')
     value = input_list[1].strip()
-    number = value[:-2]
+    number = value.split(" ")[0]
 
     if len(number) == 1:
         number = "0" + number
