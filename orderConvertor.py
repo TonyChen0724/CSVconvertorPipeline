@@ -1,6 +1,7 @@
 # todo: find out how to extract product template and product attribute
-import sys, argparse, csv
+import os
 from productCodeConvertor import *
+
 
 def setColumn(included_cols, array):
     firstName = array[included_cols[0]]
@@ -24,216 +25,146 @@ def shippingTotalConvertor(input):
 def productCodeProcess():
     pass
 
-# command arguments
-parser = argparse.ArgumentParser(description='csv to postgres',\
- fromfile_prefix_chars="@")
-parser.add_argument('file', help='csv file to import', action='store')
-args = parser.parse_args()
-csv_file = args.file
+def startConvertingCSV(csv_file):
+    # command arguments
+    # parser = argparse.ArgumentParser(description='csv to postgres',\
+    #  fromfile_prefix_chars="@")
+    # parser.add_argument('file', help='csv file to import', action='store')
+    # args = parser.parse_args()
+    # # csv_file = args.file
+    #
+    # print("debug")
 
-print("debug")
-new_csv_file = "C:\\Users\\OEM\\Desktop\\nzkwRebuild\\newOrder2.csv" # need to be arguments
+    new_csv_file = os.path.dirname(csv_file) + "/TradevineOrder.csv"
 
-included_cols = [2, 3, 5, 8]
-i = 0
+    # new_csv_file = "C:\\Users\\OEM\\Desktop\\nzkwRebuild\\newOrder2.csv" # need to be arguments
 
-# open csv file
-with open(csv_file, 'r') as csvfile:
-    next(csvfile)
-    # 43 columns : product code -37
-    headerLineTradevine = "Order Reference,Order Grand Total,Customer First Name,Customer Last Name,Customer Email,Billing Address Line 1,Billing Address Line 2,Billing Address Line 3,Billing Address Town,Billing Address Post Code,Billing Address Region,Billing Address Country,Shipping Address Same As Billing,Shipping Address Line 1,Shipping Address Line 2,Shipping Address Line 3,Shipping Address Town,Shipping Address Post Code,Shipping Address Region,Shipping Address Country,Shipping Method,Requested Shipping Date,Order Shipping Amount,Order Shipping Description,Order Shipping Tax Percent,Order Shipping Tax Amount,Payment Method,Is Payment Received,Payment Reference,Is Manually Approved,Payment Terms,Public Notes,Private Notes,Is Tax Applicable,Order Discount Amount,Prices Tax Inclusive,Label List,Product Code,Quantity,Unit Price,Tax Code,Tax Percent,Tax Line Amount,Line Note"
-    elements = headerLineTradevine.split(",")
-    i = 0
-    for element in elements:
-        element += "[" + str(i) + "]"
-        i += 1
-        print(element)
-
-    headerLineZencart = "Order ID,Customer Email,First Name,Last Name,Company,Delivery Street,Delivery Suburb,Delivery City,Delivery State,Delivery Post Code,Delivery Country,Ship Dest Type,Shipping Method,Shipping Total,Customers Telephone,Order Total,Order Date,Order Notes,Order Tax,Order Discount,Payment Method"
-    print("-" * 40)
-
-    elementsB = headerLineZencart.split(",")
-    j = 0
-    for element in elementsB:
-        element += "[" + str(j) + "]"
-        j += 1
-        print(element)
-
-
-    with open(new_csv_file, "a") as csvFile:
-        writeToCSV(csvFile, headerLineTradevine)
-
-    # get number of columns
+    included_cols = [2, 3, 5, 8]
     i = 0
 
+    # open csv file
+    with open(csv_file, 'r') as csvfile:
+        next(csvfile)
+        # 43 columns : product code -37
+        headerLineTradevine = "Order Reference,Order Grand Total,Customer First Name,Customer Last Name,Customer Email,Billing Address Line 1,Billing Address Line 2,Billing Address Line 3,Billing Address Town,Billing Address Post Code,Billing Address Region,Billing Address Country,Shipping Address Same As Billing,Shipping Address Line 1,Shipping Address Line 2,Shipping Address Line 3,Shipping Address Town,Shipping Address Post Code,Shipping Address Region,Shipping Address Country,Shipping Method,Requested Shipping Date,Order Shipping Amount,Order Shipping Description,Order Shipping Tax Percent,Order Shipping Tax Amount,Payment Method,Is Payment Received,Payment Reference,Is Manually Approved,Payment Terms,Public Notes,Private Notes,Is Tax Applicable,Order Discount Amount,Prices Tax Inclusive,Label List,Product Code,Quantity,Unit Price,Tax Code,Tax Percent,Tax Line Amount,Line Note"
+        elements = headerLineTradevine.split(",")
+        i = 0
+        for element in elements:
+            element += "[" + str(i) + "]"
+            i += 1
+            print(element)
 
+        headerLineZencart = "Order ID,Customer Email,First Name,Last Name,Company,Delivery Street,Delivery Suburb,Delivery City,Delivery State,Delivery Post Code,Delivery Country,Ship Dest Type,Shipping Method,Shipping Total,Customers Telephone,Order Total,Order Date,Order Notes,Order Tax,Order Discount,Payment Method"
+        print("-" * 40)
 
+        elementsB = headerLineZencart.split(",")
+        j = 0
+        for element in elementsB:
+            element += "[" + str(j) + "]"
+            j += 1
+            print(element)
 
-    for line in csvfile.readlines():
-        """array = line.split(',')
-        firstName, lastName, emailAddress, phoneNumber = setColumn(included_cols, array)
-
-        newCSVline = emailAddress + "," + firstName + "," + lastName + ",,,,,,,,,,,,,,,,"
-        i += 1
-
-        if (i == 1999):
-            break
 
         with open(new_csv_file, "a") as csvFile:
-            writeToCSV(csvFile, newCSVline)"""
+            writeToCSV(csvFile, headerLineTradevine)
 
-        zencartArray = line.split(',')
-        for i in range(len(zencartArray)):
-            zencartArray[i] = zencartArray[i].strip("\"")
-        arrayTradevine = 43 * [""]
-
-#------------------------------------------------------------------------
-        # mapping zencart to tradevine
-        arrayTradevine[0] = zencartArray[0]
-        print(zencartArray[15])
-        # try:
-        #     arrayTradevine[1] = shippingTotalConvertor(zencartArray[15])
-        # except:
-        #     print("error line is " + zencartArray[15])
-        arrayTradevine[1] = shippingTotalConvertor(zencartArray[15])
-
-        arrayTradevine[2] = zencartArray[2]
-        arrayTradevine[5] = zencartArray[5]
-        arrayTradevine[8] = zencartArray[6]
-        arrayTradevine[9] = zencartArray[9]
-        arrayTradevine[11] = zencartArray[10]
-
-        region_town = zencartArray[7]
-        arrayTradevine[8] = region_town
-        arrayTradevine[10] = region_town
+        # get number of columns
+        i = 0
 
 
-        # ----------------------------------------------------------------------------------------------------------
-        # determine tax code based on country
-        if arrayTradevine[11] == "New Zealand":
-            arrayTradevine[40] = "GST"
-            arrayTradevine[41] = "15"
-            arrayTradevine[22] = shippingTotalConvertor(zencartArray[13])
 
-        else:
-            arrayTradevine[40] = "NONE"
-            arrayTradevine[22] = zencartArray[13]
-            # ----------------------------------------------------------------------------------------------------------
 
-        paymentMethod = zencartArray[20]
-        paymentMethod = paymentMethod.replace('"', '')
+        for line in csvfile.readlines():
+            """array = line.split(',')
+            firstName, lastName, emailAddress, phoneNumber = setColumn(included_cols, array)
+    
+            newCSVline = emailAddress + "," + firstName + "," + lastName + ",,,,,,,,,,,,,,,,"
+            i += 1
+    
+            if (i == 1999):
+                break
+    
+            with open(new_csv_file, "a") as csvFile:
+                writeToCSV(csvFile, newCSVline)"""
 
-        print("delivery method is " + paymentMethod)  # delivery method
-
-        if (paymentMethod == "PayPal" or paymentMethod == "dps"):
-            arrayTradevine[27] = "Yes"
-        else:
-            arrayTradevine[27] = "No"
-
-        quantity = zencartArray[21]
-        arrayTradevine[38] = quantity
-        arrayTradevine[39] = zencartArray[22]
-        product_code_template = zencartArray[24]
-        product_attribute = zencartArray[25]
-        product_code = product_code_convertor(product_code_template, product_attribute)
-        arrayTradevine[37] = product_code
-        #arrayTradevine[37] = "KWTB003BK"
-#-------------------------------------------------------------------------------------
-
-        #------------------------------------------------------------------------------------------------
-        # special process to get rid of trailing empty cells while leave the empty cells in between untouched
-        for i in range(len(zencartArray)-1):
-            if zencartArray[i] == '' and (zencartArray[i+1] == '' or zencartArray[i+1] == '\n'):
-                zencartArray[i] = 'xxx'
-
-        while 'xxx' in zencartArray:
-            zencartArray.remove('xxx')
-
-        if zencartArray[-1] == '':
-            del zencartArray[-1]
-        #------------------------------------------------------------------------------------------------
-
-        product_number = int((len(zencartArray) - 20) / 5)
-        line2Generate = product_number - 1
-
-        print(arrayTradevine) # append to csv
-        #---------------------------------------------------------
-        # write line to csv file
-        newTradevineLine = ""
-        for i in range(len(arrayTradevine)):
-            newTradevineLine += arrayTradevine[i]
-            if i != len(arrayTradevine) - 1:
-                newTradevineLine += ","
-
-        with open(new_csv_file, "a") as csvFile:
-            writeToCSV(csvFile, newTradevineLine + ",")
-        #---------------------------------------------------------
-
-        for i in range(line2Generate):
+            zencartArray = line.split(',')
+            for i in range(len(zencartArray)):
+                zencartArray[i] = zencartArray[i].strip("\"")
             arrayTradevine = 43 * [""]
 
-            # ------------------------------------------------------------------------
+    #------------------------------------------------------------------------
             # mapping zencart to tradevine
             arrayTradevine[0] = zencartArray[0]
+            print(zencartArray[15])
+            # try:
+            #     arrayTradevine[1] = shippingTotalConvertor(zencartArray[15])
+            # except:
+            #     print("error line is " + zencartArray[15])
+
+            # arrayTradevine[1] = shippingTotalConvertor(zencartArray[15]) toggle based on settings of website
             arrayTradevine[1] = zencartArray[15]
+
             arrayTradevine[2] = zencartArray[2]
             arrayTradevine[5] = zencartArray[5]
             arrayTradevine[8] = zencartArray[6]
             arrayTradevine[9] = zencartArray[9]
-            arrayTradevine[11] = zencartArray[10] # country
+            arrayTradevine[11] = zencartArray[10]
 
             region_town = zencartArray[7]
             arrayTradevine[8] = region_town
             arrayTradevine[10] = region_town
 
+
+            # ----------------------------------------------------------------------------------------------------------
+            # determine tax code based on country
+            if arrayTradevine[11] == "New Zealand":
+                arrayTradevine[40] = "GST"
+                arrayTradevine[41] = "15"
+                arrayTradevine[22] = shippingTotalConvertor(zencartArray[13])
+
+            else:
+                arrayTradevine[40] = "NONE"
+                arrayTradevine[22] = zencartArray[13]
+                # ----------------------------------------------------------------------------------------------------------
+
             paymentMethod = zencartArray[20]
             paymentMethod = paymentMethod.replace('"', '')
 
-            print("delivery method is " + paymentMethod) # delivery method
+            print("delivery method is " + paymentMethod)  # delivery method
 
             if (paymentMethod == "PayPal" or paymentMethod == "dps"):
                 arrayTradevine[27] = "Yes"
             else:
                 arrayTradevine[27] = "No"
 
-
-#----------------------------------------------------------------------------------------------------------
-            # determine tax code based on country
-            if arrayTradevine[11] == "New Zealand":
-                arrayTradevine[40] = "GST"
-                arrayTradevine[41] = "15"
-                arrayTradevine[22] = shippingTotalConvertor(zencartArray[13])
-            else:
-                arrayTradevine[40] = "NONE"
-                arrayTradevine[22] = zencartArray[13]
-#----------------------------------------------------------------------------------------------------------
-            quantity = zencartArray[26 + 5 * i]
-
-            arrayTradevine[38] = zencartArray[26 + 5 * i]
-            arrayTradevine[39] = zencartArray[27 + 5 * i]
-
-            product_code_template = zencartArray[29 + 5 * i] # later use
-            try:
-
-                product_attribute = zencartArray[30 + 5 * i]
-            except:
-                product_attribute = ''
-            product_attribute = product_attribute.strip("\n")
-
-
+            quantity = zencartArray[21]
+            arrayTradevine[38] = quantity
+            arrayTradevine[39] = zencartArray[22]
+            product_code_template = zencartArray[24]
+            product_attribute = zencartArray[25]
             product_code = product_code_convertor(product_code_template, product_attribute)
             arrayTradevine[37] = product_code
-
-
             #arrayTradevine[37] = "KWTB003BK"
+    #-------------------------------------------------------------------------------------
 
-            # -------------------------------------------------------------------------------------
+            #------------------------------------------------------------------------------------------------
+            # special process to get rid of trailing empty cells while leave the empty cells in between untouched
+            for i in range(len(zencartArray)-1):
+                if zencartArray[i] == '' and (zencartArray[i+1] == '' or zencartArray[i+1] == '\n'):
+                    zencartArray[i] = 'xxx'
 
+            while 'xxx' in zencartArray:
+                zencartArray.remove('xxx')
 
+            if zencartArray[-1] == '':
+                del zencartArray[-1]
+            #------------------------------------------------------------------------------------------------
 
+            product_number = int((len(zencartArray) - 20) / 5)
+            line2Generate = product_number - 1
 
             print(arrayTradevine) # append to csv
-            # ---------------------------------------------------------
+            #---------------------------------------------------------
             # write line to csv file
             newTradevineLine = ""
             for i in range(len(arrayTradevine)):
@@ -243,12 +174,87 @@ with open(csv_file, 'r') as csvfile:
 
             with open(new_csv_file, "a") as csvFile:
                 writeToCSV(csvFile, newTradevineLine + ",")
-            # ---------------------------------------------------------
+            #---------------------------------------------------------
+
+            for i in range(line2Generate):
+                arrayTradevine = 43 * [""]
+
+                # ------------------------------------------------------------------------
+                # mapping zencart to tradevine
+                arrayTradevine[0] = zencartArray[0]
+                arrayTradevine[1] = zencartArray[15]
+                arrayTradevine[2] = zencartArray[2]
+                arrayTradevine[5] = zencartArray[5]
+                arrayTradevine[8] = zencartArray[6]
+                arrayTradevine[9] = zencartArray[9]
+                arrayTradevine[11] = zencartArray[10] # country
+
+                region_town = zencartArray[7]
+                arrayTradevine[8] = region_town
+                arrayTradevine[10] = region_town
+
+                paymentMethod = zencartArray[20]
+                paymentMethod = paymentMethod.replace('"', '')
+
+                print("delivery method is " + paymentMethod) # delivery method
+
+                if (paymentMethod == "PayPal" or paymentMethod == "dps"):
+                    arrayTradevine[27] = "Yes"
+                else:
+                    arrayTradevine[27] = "No"
+
+
+    #----------------------------------------------------------------------------------------------------------
+                # determine tax code based on country
+                if arrayTradevine[11] == "New Zealand":
+                    arrayTradevine[40] = "GST"
+                    arrayTradevine[41] = "15"
+                    arrayTradevine[22] = shippingTotalConvertor(zencartArray[13])
+                else:
+                    arrayTradevine[40] = "NONE"
+                    arrayTradevine[22] = zencartArray[13]
+    #----------------------------------------------------------------------------------------------------------
+                quantity = zencartArray[26 + 5 * i]
+
+                arrayTradevine[38] = zencartArray[26 + 5 * i]
+                arrayTradevine[39] = zencartArray[27 + 5 * i]
+
+                product_code_template = zencartArray[29 + 5 * i] # later use
+                try:
+
+                    product_attribute = zencartArray[30 + 5 * i]
+                except:
+                    product_attribute = ''
+                product_attribute = product_attribute.strip("\n")
+
+
+                product_code = product_code_convertor(product_code_template, product_attribute)
+                arrayTradevine[37] = product_code
+
+
+                #arrayTradevine[37] = "KWTB003BK"
+
+                # -------------------------------------------------------------------------------------
 
 
 
 
-        pass
+                print(arrayTradevine) # append to csv
+                # ---------------------------------------------------------
+                # write line to csv file
+                newTradevineLine = ""
+                for i in range(len(arrayTradevine)):
+                    newTradevineLine += arrayTradevine[i]
+                    if i != len(arrayTradevine) - 1:
+                        newTradevineLine += ","
+
+                with open(new_csv_file, "a") as csvFile:
+                    writeToCSV(csvFile, newTradevineLine + ",")
+                # ---------------------------------------------------------
+
+
+
+
 
 
 

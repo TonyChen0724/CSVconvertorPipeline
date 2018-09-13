@@ -126,7 +126,10 @@ def an_size_convertor(input):
 def angles_convertor(input):
     input_list = input.split(':')
     value = input_list[1].strip()
-    number = value.split()[0]
+    if "Straight" in value:
+        number = value.split()[1]
+    else:
+        number = value.split()[0]
 
     if len(number) == 3:
         number = number[:-1]
