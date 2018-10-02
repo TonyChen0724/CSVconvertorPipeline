@@ -103,12 +103,14 @@ def startConvertingCSV(csv_file):
 
             # arrayTradevine[1] = shippingTotalConvertor(zencartArray[15]) toggle based on settings of website
             arrayTradevine[1] = zencartArray[15]
-
+            arrayTradevine[4] = zencartArray[1]
             arrayTradevine[2] = zencartArray[2]
             arrayTradevine[5] = zencartArray[5]
             arrayTradevine[8] = zencartArray[6]
             arrayTradevine[9] = zencartArray[9]
             arrayTradevine[11] = zencartArray[10]
+            arrayTradevine[12] = "Yes"
+
 
             region_town = zencartArray[7]
             arrayTradevine[8] = region_town
@@ -132,10 +134,15 @@ def startConvertingCSV(csv_file):
 
             print("delivery method is " + paymentMethod)  # delivery method
 
-            if (paymentMethod == "PayPal" or paymentMethod == "dps"):
+            if paymentMethod == "PayPal" or paymentMethod == "dps":
                 arrayTradevine[27] = "Yes"
             else:
                 arrayTradevine[27] = "No"
+
+            if paymentMethod == 'PayPal' or paymentMethod == 'dps':
+                arrayTradevine[26] = "PayPal"
+            else:
+                arrayTradevine[26] = "Bank Transfer"
 
             quantity = zencartArray[21]
             arrayTradevine[38] = quantity
@@ -144,7 +151,6 @@ def startConvertingCSV(csv_file):
             product_attribute = zencartArray[25]
             product_code = product_code_convertor(product_code_template, product_attribute)
             arrayTradevine[37] = product_code
-            #arrayTradevine[37] = "KWTB003BK"
     #-------------------------------------------------------------------------------------
 
             #------------------------------------------------------------------------------------------------
@@ -183,11 +189,13 @@ def startConvertingCSV(csv_file):
                 # mapping zencart to tradevine
                 arrayTradevine[0] = zencartArray[0]
                 arrayTradevine[1] = zencartArray[15]
+                arrayTradevine[4] = zencartArray[1]
                 arrayTradevine[2] = zencartArray[2]
                 arrayTradevine[5] = zencartArray[5]
                 arrayTradevine[8] = zencartArray[6]
                 arrayTradevine[9] = zencartArray[9]
                 arrayTradevine[11] = zencartArray[10] # country
+                arrayTradevine[12] = "Yes"
 
                 region_town = zencartArray[7]
                 arrayTradevine[8] = region_town
@@ -202,6 +210,13 @@ def startConvertingCSV(csv_file):
                     arrayTradevine[27] = "Yes"
                 else:
                     arrayTradevine[27] = "No"
+
+                if paymentMethod == 'PayPal':
+                    arrayTradevine[26] = "PayPal"
+                elif paymentMethod == 'dps':
+                    arrayTradevine[26] = 'Credit Card'
+                else:
+                    arrayTradevine[26] = "Bank Transfer"
 
 
     #----------------------------------------------------------------------------------------------------------
