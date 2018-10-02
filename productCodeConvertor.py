@@ -1,6 +1,10 @@
 def product_code_convertor(product_code_template, product_attributes):
     product_attributes.strip("\"")
     product_attributes.strip("\n")
+
+    if product_code_template == '':
+        return "ERROR:No ProductCode"
+
     if product_attributes == '' or product_attributes == '\n' or product_attributes == '"':
         return product_code_template
 
@@ -33,6 +37,8 @@ def product_code_convertor(product_code_template, product_attributes):
 
         elif attribute_type == 'Dimension':
             append_value = dimension_convertor(product_attribute_item)
+        elif attribute_type == 'Banjo sizes':
+            append_value = banjoSize_convertor(product_attribute_item)
 
         if "*" in product_code_template:
             template_components = product_code_template.split('*')
@@ -45,6 +51,16 @@ def product_code_convertor(product_code_template, product_attributes):
 
     print(prefix)
     return prefix
+
+# banjo sizes
+def banjoSize_convertor(input):
+    input_list = input.split(' ')
+    value = input_list[2].strip()
+    value = value.replace('M', '')
+    appendVal = value
+    return appendVal
+
+
 # Dimension
 def dimension_convertor(input):
     input_list = input.split(' ')
