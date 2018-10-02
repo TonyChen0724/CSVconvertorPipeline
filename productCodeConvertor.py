@@ -165,6 +165,8 @@ def colours_convertor(input):
         output = "BK"
     elif value == 'Red/Blue':
         output = "RB"
+    elif value == 'Silver':
+        output = 'SL'
 
 
     return output
