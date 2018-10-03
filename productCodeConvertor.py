@@ -110,15 +110,15 @@ def npt_convertor(input):
 
     output = ""
     if value == '1/8':
-        output = "02D"
+        output = "02"
     elif value == '1/4':
-        output = "04D"
+        output = "03"
     elif value == '3/8':
-        output = "06D"
+        output = "04"
     elif value == '1/2':
-        output = "08D"
+        output = "05"
     elif value == '3/4':
-        output = "12D"
+        output = "06"
     elif value == '1':
         output = "16D"
 
