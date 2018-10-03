@@ -34,7 +34,6 @@ def product_code_convertor(product_code_template, product_attributes):
             append_value = npt_convertor(product_attribute_item + " ")
         elif attribute_type == 'Oil Cooler Options':
             append_value = oil_cooler_option_convertor(product_attribute_item)
-
         elif attribute_type == 'Dimension':
             append_value = dimension_convertor(product_attribute_item)
         elif attribute_type == 'Banjo sizes':
