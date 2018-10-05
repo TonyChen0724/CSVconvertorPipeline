@@ -188,7 +188,7 @@ def startConvertingCSV(csv_file):
 
                 # ------------------------------------------------------------------------
                 # mapping zencart to tradevine
-                arrayTradevine[0] = "zencart-" + zencartArray[0]
+                arrayTradevine[0] = "nzkw-" + zencartArray[0]
                 arrayTradevine[3] = zencartArray[3]
                 arrayTradevine[1] = zencartArray[15]
                 arrayTradevine[4] = zencartArray[1]
