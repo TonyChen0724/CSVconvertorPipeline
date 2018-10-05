@@ -94,7 +94,7 @@ def startConvertingCSV(csv_file):
 
     #------------------------------------------------------------------------
             # mapping zencart to tradevine
-            arrayTradevine[0] = "zencart-" + zencartArray[0]
+            arrayTradevine[0] = "nzkw-" + zencartArray[0]
             print(zencartArray[15])
             # try:
             #     arrayTradevine[1] = shippingTotalConvertor(zencartArray[15])
@@ -111,6 +111,7 @@ def startConvertingCSV(csv_file):
             arrayTradevine[9] = zencartArray[9]
             arrayTradevine[11] = zencartArray[10]
             arrayTradevine[12] = "Yes"
+            arrayTradevine[28] = zencartArray[14]
 
 
             region_town = zencartArray[7]
@@ -198,6 +199,7 @@ def startConvertingCSV(csv_file):
                 arrayTradevine[9] = zencartArray[9]
                 arrayTradevine[11] = zencartArray[10] # country
                 arrayTradevine[12] = "Yes"
+                arrayTradevine[28] = zencartArray[14]
 
                 region_town = zencartArray[7]
                 arrayTradevine[8] = region_town
