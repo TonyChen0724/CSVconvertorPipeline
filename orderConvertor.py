@@ -144,7 +144,7 @@ def startConvertingCSV(csv_file):
             if paymentMethod == 'PayPal' or paymentMethod == 'dps':
                 arrayTradevine[26] = "PayPal"
             else:
-                arrayTradevine[26] = "EFPOS"
+                arrayTradevine[26] = "EFTPOS"
 
             quantity = zencartArray[21]
             arrayTradevine[38] = quantity
@@ -220,7 +220,7 @@ def startConvertingCSV(csv_file):
                 elif paymentMethod == 'dps':
                     arrayTradevine[26] = 'Credit Card'
                 else:
-                    arrayTradevine[26] = "EFPOS"
+                    arrayTradevine[26] = "EFTPOS"
 
 
     #----------------------------------------------------------------------------------------------------------
