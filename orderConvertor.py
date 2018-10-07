@@ -112,7 +112,7 @@ def startConvertingCSV(csv_file):
             arrayTradevine[9] = zencartArray[9]
             arrayTradevine[11] = zencartArray[10]
             arrayTradevine[12] = "Yes"
-            arrayTradevine[28] = zencartArray[14]
+            arrayTradevine[7] = zencartArray[14]
 
 
             region_town = zencartArray[7]
@@ -201,7 +201,7 @@ def startConvertingCSV(csv_file):
                 arrayTradevine[9] = zencartArray[9]
                 arrayTradevine[11] = zencartArray[10] # country
                 arrayTradevine[12] = "Yes"
-                arrayTradevine[28] = zencartArray[14]
+                arrayTradevine[7] = zencartArray[14]
 
                 region_town = zencartArray[7]
                 arrayTradevine[8] = region_town
