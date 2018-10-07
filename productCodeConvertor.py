@@ -60,7 +60,7 @@ def product_code_convertor(product_code_template, product_attributes):
 # hose dimension
 def hose_dimension_convertor(input):
     input_list = input.split('(')
-    value = input_list[1][:-3]
+    value = input_list[1][:-4]
     return value
 
 
