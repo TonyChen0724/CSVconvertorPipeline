@@ -103,16 +103,14 @@ def startConvertingCSV(csv_file):
 
             # arrayTradevine[1] = shippingTotalConvertor(zencartArray[15]) toggle based on settings of website
             arrayTradevine[1] = zencartArray[15]
-            arrayTradevine[3] = zencartArray[3]
+            arrayTradevine[3] = zencartArray[4]
             arrayTradevine[4] = zencartArray[1]
-            arrayTradevine[2] = zencartArray[2]
-            arrayTradevine[5] = zencartArray[4]
-            arrayTradevine[6] = zencartArray[5]
+            arrayTradevine[2] = zencartArray[2] + " " + zencartArray[3]
+            arrayTradevine[5] = zencartArray[5]
             arrayTradevine[8] = zencartArray[6]
             arrayTradevine[9] = zencartArray[9]
             arrayTradevine[11] = zencartArray[10]
             arrayTradevine[12] = "Yes"
-            arrayTradevine[7] = zencartArray[14]
 
 
             region_town = zencartArray[7]
@@ -191,17 +189,15 @@ def startConvertingCSV(csv_file):
                 # ------------------------------------------------------------------------
                 # mapping zencart to tradevine
                 arrayTradevine[0] = "nzkw-" + zencartArray[0]
-                arrayTradevine[3] = zencartArray[3]
+                arrayTradevine[3] = zencartArray[4]
                 arrayTradevine[1] = zencartArray[15]
                 arrayTradevine[4] = zencartArray[1]
-                arrayTradevine[2] = zencartArray[2]
-                arrayTradevine[5] = zencartArray[4]
-                arrayTradevine[6] = zencartArray[5]
+                arrayTradevine[2] = zencartArray[2] + " " + zencartArray[3]
+                arrayTradevine[5] = zencartArray[5]
                 arrayTradevine[8] = zencartArray[6]
                 arrayTradevine[9] = zencartArray[9]
                 arrayTradevine[11] = zencartArray[10] # country
                 arrayTradevine[12] = "Yes"
-                arrayTradevine[7] = zencartArray[14]
 
                 region_town = zencartArray[7]
                 arrayTradevine[8] = region_town
