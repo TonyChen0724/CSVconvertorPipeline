@@ -21,6 +21,17 @@ def shippingTotalConvertor(input):
     return output
 
 
+def address_combination(delivery_street, delivery_suburb, delivery_city, delivery_state):
+    res = delivery_street
+    if len(delivery_suburb):
+        res += " " + delivery_suburb
+    if len(delivery_city):
+        res += " " + delivery_city
+    if len(delivery_state):
+        res += " " + delivery_state
+    return res
+
+
 
 def productCodeProcess():
     pass
@@ -107,7 +118,7 @@ def startConvertingCSV(csv_file):
             arrayTradevine[3] = zencartArray[4]
             arrayTradevine[4] = zencartArray[1]
             arrayTradevine[2] = zencartArray[2] + " " + zencartArray[3]
-            arrayTradevine[5] = zencartArray[5] + zencartArray[8]
+            arrayTradevine[5] = address_combination(zencartArray[5], zencartArray[6], zencartArray[7], zencartArray[8])
             arrayTradevine[8] = zencartArray[6]
             arrayTradevine[9] = zencartArray[9]
             arrayTradevine[11] = zencartArray[10]
@@ -198,7 +209,7 @@ def startConvertingCSV(csv_file):
                 arrayTradevine[1] = zencartArray[15]
                 arrayTradevine[4] = zencartArray[1]
                 arrayTradevine[2] = zencartArray[2] + " " + zencartArray[3]
-                arrayTradevine[5] = zencartArray[5] + zencartArray[8]
+                arrayTradevine[5] = address_combination(zencartArray[5], zencartArray[6], zencartArray[7],zencartArray[8])
                 arrayTradevine[8] = zencartArray[6]
                 arrayTradevine[9] = zencartArray[9]
                 arrayTradevine[11] = zencartArray[10] # country
@@ -278,23 +289,24 @@ def startConvertingCSV(csv_file):
                 # ---------------------------------------------------------
 
             # for order discount -------------------------------------------------------------------------------------------------------------------------------------------------------
-            print("--------------------------------------------------")
-            print(quantity_price_array)
-            print("--------------------------------------------------")
-            shipping_amount = arrayTradevine[22]
+            # print("--------------------------------------------------")
+            # print(quantity_price_array)
+            # print("--------------------------------------------------")
+            # shipping_amount = arrayTradevine[22]
 
             #sumvalue = sum([float(quantity_price_array[i]) * float(quantity_price_array[i+1]) for i in range(len(quantity_price_array) - 1) if i % 2 == 1])
 
-            sumvalue = 0
-            for i in range(0, len(quantity_price_array), +2):
-                sumvalue += float(quantity_price_array[i]) * float(quantity_price_array[i+1])
-            order_cal_total = (sumvalue + float(shipping_amount)) * 1.15
+            # sumvalue = 0
+            # for i in range(0, len(quantity_price_array), +2):
+            #     sumvalue += float(quantity_price_array[i]) * float(quantity_price_array[i+1])
+            # order_cal_total = (sumvalue + float(shipping_amount)) * 1.15
+            #
+            # order_discount = order_cal_total - float(arrayTradevine[1])
+            # order_discount = round(order_discount, 2)
+            #
+            # print("order discount is :")
+            # print(order_discount)
 
-            order_discount = order_cal_total - float(arrayTradevine[1])
-            order_discount = round(order_discount, 2)
-
-            print("order discount is :")
-            print(order_discount)
             # for order discount --------------------------------------------------------------------------------------------------------------------------------------------------------
 
 

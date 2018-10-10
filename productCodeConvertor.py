@@ -40,8 +40,8 @@ def product_code_convertor(product_code_template, product_attributes):
             append_value = banjoSize_convertor(product_attribute_item)
         elif attribute_type == 'Hose Dimensions':
             append_value = hose_dimension_convertor(product_attribute_item)
-        # elif attribute_type == 'Options-Metric':
-        #     append_value = options_metric_convertor(product_attribute_item)
+        elif attribute_type == 'Options-Metric':
+            append_value = options_metric_convertor(product_attribute_item)
         elif attribute_type == 'Left / Right':
             append_value = leftRight_convertor(product_attribute_item)
 
@@ -82,7 +82,7 @@ def leftRight_convertor(input):
 def options_metric_convertor(input):
     input_list = input.split(':')
     values = input_list[1].split('x')
-    value1 = values[0]
+    value1 = values[0].trim()
     value2 = str(float(values[1][:-1]) * 100).replace('0', '')
 
     value = (value1 + value2)[:-1]
