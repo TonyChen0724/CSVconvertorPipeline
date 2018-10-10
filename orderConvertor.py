@@ -86,6 +86,7 @@ def startConvertingCSV(csv_file):
     
             with open(new_csv_file, "a") as csvFile:
                 writeToCSV(csvFile, newCSVline)"""
+            quantity_price_array = [] # order discount problem
 
             zencartArray = line.split(',')
             for i in range(len(zencartArray)):
@@ -106,7 +107,7 @@ def startConvertingCSV(csv_file):
             arrayTradevine[3] = zencartArray[4]
             arrayTradevine[4] = zencartArray[1]
             arrayTradevine[2] = zencartArray[2] + " " + zencartArray[3]
-            arrayTradevine[5] = zencartArray[5]
+            arrayTradevine[5] = zencartArray[5] + zencartArray[8]
             arrayTradevine[8] = zencartArray[6]
             arrayTradevine[9] = zencartArray[9]
             arrayTradevine[11] = zencartArray[10]
@@ -148,6 +149,10 @@ def startConvertingCSV(csv_file):
             quantity = zencartArray[21]
             arrayTradevine[38] = quantity
             arrayTradevine[39] = zencartArray[22]
+
+            quantity_price_array.append(arrayTradevine[38])
+            quantity_price_array.append(arrayTradevine[39])
+
             product_code_template = zencartArray[24]
             product_attribute = zencartArray[25]
             product_code = product_code_convertor(product_code_template, product_attribute)
@@ -193,7 +198,7 @@ def startConvertingCSV(csv_file):
                 arrayTradevine[1] = zencartArray[15]
                 arrayTradevine[4] = zencartArray[1]
                 arrayTradevine[2] = zencartArray[2] + " " + zencartArray[3]
-                arrayTradevine[5] = zencartArray[5]
+                arrayTradevine[5] = zencartArray[5] + zencartArray[8]
                 arrayTradevine[8] = zencartArray[6]
                 arrayTradevine[9] = zencartArray[9]
                 arrayTradevine[11] = zencartArray[10] # country
@@ -236,6 +241,9 @@ def startConvertingCSV(csv_file):
                 arrayTradevine[38] = zencartArray[26 + 5 * i]
                 arrayTradevine[39] = zencartArray[27 + 5 * i]
 
+                quantity_price_array.append(arrayTradevine[38])
+                quantity_price_array.append(arrayTradevine[39])
+
                 product_code_template = zencartArray[29 + 5 * i] # later use
                 try:
 
@@ -269,10 +277,25 @@ def startConvertingCSV(csv_file):
                     writeToCSV(csvFile, newTradevineLine + ",")
                 # ---------------------------------------------------------
 
+            # for order discount -------------------------------------------------------------------------------------------------------------------------------------------------------
+            print("--------------------------------------------------")
+            print(quantity_price_array)
+            print("--------------------------------------------------")
+            shipping_amount = arrayTradevine[22]
+
+            #sumvalue = sum([float(quantity_price_array[i]) * float(quantity_price_array[i+1]) for i in range(len(quantity_price_array) - 1) if i % 2 == 1])
+
+            sumvalue = 0
+            for i in range(0, len(quantity_price_array), +2):
+                sumvalue += float(quantity_price_array[i]) * float(quantity_price_array[i+1])
+            order_cal_total = (sumvalue + float(shipping_amount)) * 1.15
+
+            order_discount = order_cal_total - float(arrayTradevine[1])
 
 
-
-
+            print("order discount is :")
+            print(order_discount)
+            # for order discount --------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
