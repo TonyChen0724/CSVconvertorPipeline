@@ -291,7 +291,7 @@ def startConvertingCSV(csv_file):
             order_cal_total = (sumvalue + float(shipping_amount)) * 1.15
 
             order_discount = order_cal_total - float(arrayTradevine[1])
-
+            order_discount = round(order_discount, 2)
 
             print("order discount is :")
             print(order_discount)
