@@ -68,7 +68,7 @@ def hose_dimension_convertor(input):
 def leftRight_convertor(input):
     input_list = input.split(':')
     value = input_list[1][1:]
-
+    value = value.strip()
 
     if value == 'Left':
         res = 'L'
@@ -82,7 +82,7 @@ def leftRight_convertor(input):
 def options_metric_convertor(input):
     input_list = input.split(':')
     values = input_list[1].split('x')
-    value1 = values[0].trim()
+    value1 = values[0].strip()
     value2 = str(float(values[1][:-1]) * 100).replace('0', '')
 
     value = (value1 + value2)[:-1]
