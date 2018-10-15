@@ -44,6 +44,14 @@ def product_code_convertor(product_code_template, product_attributes):
             append_value = options_metric_convertor(product_attribute_item)
         elif attribute_type == 'Left / Right':
             append_value = leftRight_convertor(product_attribute_item)
+        elif attribute_type == 'Gloves sizes':
+            append_value = glove_size_convertor(product_attribute_item)
+        elif attribute_type == 'Glove colours':
+            append_value = colours_convertor(product_attribute_item)
+        elif attribute_type == 'NPT to Barb':
+            append_value = npt_to_barb_convertor(product_attribute_item)
+        elif attribute_type == 'Alloy Spanner':
+            append_value = alloy_spanner_convertor(product_attribute_item)
 
         if "*" in product_code_template:
             template_components = product_code_template.split('*')
@@ -56,6 +64,37 @@ def product_code_convertor(product_code_template, product_attributes):
 
     print(prefix)
     return prefix
+
+# alloy spanner
+def alloy_spanner_convertor(input):
+    res = ""
+    input_list = input.split(':')
+    spanners = input_list[1].split('-')
+    for spanner in spanners:
+        res += spanner
+    return res.upper()
+
+
+
+# NPT to Barb
+def npt_to_barb_convertor(input):
+    input_list = input.split('(')
+    number = input_list[1][:-3]
+    if len(number) == 1:
+        number = "0" + number
+    return number
+
+
+
+
+# Gloves sizes
+
+def glove_size_convertor(input):
+    input_list = input.split(':')
+    res = input_list[1]
+    return res
+
+
 
 # hose dimension
 def hose_dimension_convertor(input):
@@ -132,8 +171,17 @@ def oil_cooler_option_convertor(input):
 
 # size
 def size_convertor(input):
+
+
     input_list = input.split(':')
     value = input_list[1].strip()
+
+    valuesplict_space = value.split(' ')
+
+    # 10 Row
+    if len(valuesplict_space) == 2:
+        return valuesplict_space[0]
+
     number = value[:-2]
 
     if len(number) == 1:
