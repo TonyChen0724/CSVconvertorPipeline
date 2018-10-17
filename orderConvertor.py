@@ -16,9 +16,10 @@ def writeToCSV(csvFile, line):
     csvFile.write('\n')
 
 def shippingTotalConvertor(input):
-    input = input.strip("\"")
-    output = str(round(float(input) - float(input) * 3 / 23, 2))
-    return output
+    # input = input.strip("\"")
+    # output = str(round(float(input) - float(input) * 3 / 23, 5))
+    # return output
+    return input
 
 
 def address_combination(delivery_street, delivery_suburb, delivery_city, delivery_state):
@@ -152,8 +153,10 @@ def startConvertingCSV(csv_file):
             else:
                 arrayTradevine[27] = "No"
 
-            if paymentMethod == 'PayPal' or paymentMethod == 'dps':
+            if paymentMethod == 'PayPal':
                 arrayTradevine[26] = "PayPal"
+            elif paymentMethod == 'dps':
+                arrayTradevine[26] = "Credit Card"
             else:
                 arrayTradevine[26] = "EFTPOS"
 
