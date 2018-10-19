@@ -25,11 +25,12 @@ def shippingTotalConvertor(input):
 def address_combination(delivery_street, delivery_suburb, delivery_city, delivery_state):
     res = delivery_street
     if len(delivery_suburb):
-        res += " " + delivery_suburb
+        res += "." + delivery_suburb
     if len(delivery_city):
-        res += " " + delivery_city
+        if delivery_city != delivery_suburb:
+            res += "." + delivery_city
     if len(delivery_state):
-        res += " " + delivery_state
+        res += "." + delivery_state
     return res
 
 
