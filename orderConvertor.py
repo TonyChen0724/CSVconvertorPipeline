@@ -16,10 +16,10 @@ def writeToCSV(csvFile, line):
     csvFile.write('\n')
 
 def shippingTotalConvertor(input):
-    # input = input.strip("\"")
-    # output = str(round(float(input) - float(input) * 3 / 23, 5))
-    # return output
-    return input
+    input = input.strip("\"")
+    output = str(round(float(input) - float(input) * 3 / 23, 5))
+    return output
+
 
 
 def address_combination(delivery_street, delivery_suburb, delivery_city, delivery_state):
@@ -30,7 +30,8 @@ def address_combination(delivery_street, delivery_suburb, delivery_city, deliver
         if delivery_city != delivery_suburb:
             res += "." + delivery_city
     if len(delivery_state):
-        res += "." + delivery_state
+        if delivery_state != delivery_city:
+            res += "." + delivery_state
     return res
 
 
@@ -117,7 +118,7 @@ def startConvertingCSV(csv_file):
 
             # arrayTradevine[1] = shippingTotalConvertor(zencartArray[15]) toggle based on settings of website
             arrayTradevine[1] = zencartArray[15]
-            arrayTradevine[3] = zencartArray[4]
+            arrayTradevine[3] = "@" + zencartArray[4]
             arrayTradevine[4] = zencartArray[1]
             arrayTradevine[2] = zencartArray[2] + " " + zencartArray[3]
             arrayTradevine[5] = address_combination(zencartArray[5], zencartArray[6], zencartArray[7], zencartArray[8])
