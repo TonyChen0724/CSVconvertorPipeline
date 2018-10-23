@@ -118,7 +118,8 @@ def startConvertingCSV(csv_file):
 
             # arrayTradevine[1] = shippingTotalConvertor(zencartArray[15]) toggle based on settings of website
             arrayTradevine[1] = zencartArray[15]
-            arrayTradevine[3] = "@" + zencartArray[4]
+            if zencartArray[4]:
+                arrayTradevine[3] = "@" + zencartArray[4]
             arrayTradevine[4] = zencartArray[1]
             arrayTradevine[2] = zencartArray[2] + " " + zencartArray[3]
             arrayTradevine[5] = address_combination(zencartArray[5], zencartArray[6], zencartArray[7], zencartArray[8])
@@ -210,7 +211,8 @@ def startConvertingCSV(csv_file):
                 # ------------------------------------------------------------------------
                 # mapping zencart to tradevine
                 arrayTradevine[0] = "nzkw-" + zencartArray[0]
-                arrayTradevine[3] = zencartArray[4]
+                if zencartArray[4]:
+                    arrayTradevine[3] = "@" + zencartArray[4]
                 arrayTradevine[1] = zencartArray[15]
                 arrayTradevine[4] = zencartArray[1]
                 arrayTradevine[2] = zencartArray[2] + " " + zencartArray[3]
