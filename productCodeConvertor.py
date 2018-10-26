@@ -254,6 +254,8 @@ def colours_convertor(input):
         output = 'SL'
     elif value == 'Blue':
         output = 'BL'
+    elif value == 'Red':
+        output = 'RD'
 
 
     return output
