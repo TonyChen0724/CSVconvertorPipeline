@@ -5,6 +5,9 @@ def product_code_convertor(product_code_template, product_attributes):
     if product_code_template == '':
         return "ERROR:No ProductCode"
 
+
+
+
     if product_attributes == '' or product_attributes == '\n' or product_attributes == '"':
         return product_code_template
 
@@ -22,8 +25,14 @@ def product_code_convertor(product_code_template, product_attributes):
         product_attribute_item = product_attributes_list[i]
         attribute_type = product_attribute_item.split(":")[0].strip()
         append_value = ""
+
+
+
         if attribute_type == 'Options-AN Sizes':
-            append_value = an_size_convertor(product_attribute_item)
+            if 'KWFJN' in product_code_template:
+                append_value = 'minus2'
+            else:
+                append_value = an_size_convertor(product_attribute_item)
         elif attribute_type == 'Options-Angles':
             append_value = angles_convertor(product_attribute_item)
         elif attribute_type == 'Options-Colours':

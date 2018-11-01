@@ -171,6 +171,8 @@ def startConvertingCSV(csv_file):
             quantity_price_array.append(arrayTradevine[39])
 
             product_code_template = zencartArray[24]
+
+
             product_attribute = zencartArray[25]
             product_code = product_code_convertor(product_code_template, product_attribute)
             arrayTradevine[37] = product_code
